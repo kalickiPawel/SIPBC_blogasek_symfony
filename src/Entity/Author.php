@@ -5,172 +5,309 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Author
+ *
+ * @ORM\Table(name="author")
  * @ORM\Entity(repositoryClass="App\Repository\AuthorRepository")
  */
 class Author
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=255, unique=true)
      */
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="company", type="string", length=255)
      */
     private $company;
 
     /**
-     * @ORM\Column(type="string", length=500)
+     * @var string
+     *
+     * @ORM\Column(name="short_bio", type="string", length=500)
      */
     private $shortBio;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     *
+     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
      */
     private $phone;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     *
+     * @ORM\Column(name="facebook", type="string", length=255, nullable=true)
      */
     private $facebook;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     *
+     * @ORM\Column(name="twitter", type="string", length=255, nullable=true)
      */
     private $twitter;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     *
+     * @ORM\Column(name="github", type="string", length=255, nullable=true)
      */
     private $github;
 
-    public function getId(): ?int
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Author
+     */
+    public function setName($name)
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getTitle(): ?string
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(string $title): self
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return Author
+     */
+    public function setTitle($title)
     {
         $this->title = $title;
 
         return $this;
     }
 
-    public function getUsername(): ?string
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
     {
-        return $this->username;
+        return $this->title;
     }
 
-    public function setUsername(string $username): self
+    /**
+     * Set username
+     *
+     * @param string $username
+     *
+     * @return Author
+     */
+    public function setUsername($username)
     {
         $this->username = $username;
 
         return $this;
     }
 
-    public function getCompany(): ?string
+    /**
+     * Get username
+     *
+     * @return string
+     */
+    public function getUsername()
     {
-        return $this->company;
+        return $this->username;
     }
 
-    public function setCompany(string $company): self
+    /**
+     * Set company
+     *
+     * @param string $company
+     *
+     * @return Author
+     */
+    public function setCompany($company)
     {
         $this->company = $company;
 
         return $this;
     }
 
-    public function getShortBio(): ?string
+    /**
+     * Get company
+     *
+     * @return string
+     */
+    public function getCompany()
     {
-        return $this->shortBio;
+        return $this->company;
     }
 
-    public function setShortBio(string $shortBio): self
+    /**
+     * Set shortBio
+     *
+     * @param string $shortBio
+     *
+     * @return Author
+     */
+    public function setShortBio($shortBio)
     {
         $this->shortBio = $shortBio;
 
         return $this;
     }
 
-    public function getPhone(): ?string
+    /**
+     * Get shortBio
+     *
+     * @return string
+     */
+    public function getShortBio()
     {
-        return $this->phone;
+        return $this->shortBio;
     }
 
-    public function setPhone(?string $phone): self
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     *
+     * @return Author
+     */
+    public function setPhone($phone)
     {
         $this->phone = $phone;
 
         return $this;
     }
 
-    public function getFacebook(): ?string
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
     {
-        return $this->facebook;
+        return $this->phone;
     }
 
-    public function setFacebook(?string $facebook): self
+    /**
+     * Set facebook
+     *
+     * @param string $facebook
+     *
+     * @return Author
+     */
+    public function setFacebook($facebook)
     {
         $this->facebook = $facebook;
 
         return $this;
     }
 
-    public function getTwitter(): ?string
+    /**
+     * Get facebook
+     *
+     * @return string
+     */
+    public function getFacebook()
     {
-        return $this->twitter;
+        return $this->facebook;
     }
 
-    public function setTwitter(?string $twitter): self
+    /**
+     * Set twitter
+     *
+     * @param string $twitter
+     *
+     * @return Author
+     */
+    public function setTwitter($twitter)
     {
         $this->twitter = $twitter;
 
         return $this;
     }
 
-    public function getGithub(): ?string
+    /**
+     * Get twitter
+     *
+     * @return string
+     */
+    public function getTwitter()
     {
-        return $this->github;
+        return $this->twitter;
     }
 
-    public function setGithub(?string $github): self
+    /**
+     * Set github
+     *
+     * @param string $github
+     *
+     * @return Author
+     */
+    public function setGithub($github)
     {
         $this->github = $github;
 
         return $this;
+    }
+
+    /**
+     * Get github
+     *
+     * @return string
+     */
+    public function getGithub()
+    {
+        return $this->github;
     }
 }

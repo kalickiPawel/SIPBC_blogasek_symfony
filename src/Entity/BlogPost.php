@@ -5,139 +5,271 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * BlogPost
+ *
+ * @ORM\Table(name="blog_post")
  * @ORM\Entity(repositoryClass="App\Repository\BlogPostRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class BlogPost
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
 
     /**
-     * @ORM\Column(type="string", length=2000)
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=2000)
      */
     private $description;
 
     /**
-     * @ORM\Column(type="text")
+     * @var string
+     *
+     * @ORM\Column(name="body", type="text")
      */
     private $body;
 
     /**
+     * @var Author
+     *
      * @ORM\ManyToOne(targetEntity="Author")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $author;
 
     /**
-     * @ORM\Column(type="datetimetz")
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetimetz")
      */
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
-    public function getId(): ?int
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(string $title): self
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return BlogPost
+     */
+    public function setTitle($title)
     {
         $this->title = $title;
 
         return $this;
     }
 
-    public function getSlug(): ?string
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
     {
-        return $this->slug;
+        return $this->title;
     }
 
-    public function setSlug(string $slug): self
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return BlogPost
+     */
+    public function setSlug($slug)
     {
         $this->slug = $slug;
 
         return $this;
     }
 
-    public function getDescription(): ?string
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
     {
-        return $this->description;
+        return $this->slug;
     }
 
-    public function setDescription(string $description): self
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return BlogPost
+     */
+    public function setDescription($description)
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function getBody(): ?string
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
     {
-        return $this->body;
+        return $this->description;
     }
 
-    public function setBody(string $body): self
+    /**
+     * Set body
+     *
+     * @param string $body
+     *
+     * @return BlogPost
+     */
+    public function setBody($body)
     {
         $this->body = $body;
 
         return $this;
     }
 
-    public function getAuthor(): ?string
+    /**
+     * Get body
+     *
+     * @return string
+     */
+    public function getBody()
     {
-        return $this->author;
+        return $this->body;
     }
 
-    public function setAuthor(string $author): self
+    /**
+     * Set author
+     *
+     * @param Author $author
+     *
+     * @return BlogPost
+     */
+    public function setAuthor(Author $author)
     {
         $this->author = $author;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    /**
+     * Get author
+     *
+     * @return Author
+     */
+    public function getAuthor()
     {
-        return $this->createdAt;
+        return $this->author;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return BlogPost
+     */
+    public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
     {
-        return $this->updatedAt;
+        return $this->createdAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return BlogPost
+     */
+    public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        if (!$this->getCreatedAt()) {
+            $this->setCreatedAt(new \DateTime());
+        }
+
+        if (!$this->getUpdatedAt()) {
+            $this->setUpdatedAt(new \DateTime());
+        }
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate()
+    {
+        $this->setUpdatedAt(new \DateTime());
     }
 }
